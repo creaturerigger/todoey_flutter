@@ -15,7 +15,15 @@ class TasksScreen extends StatelessWidget {
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (context) => const AddTaskScreen(),
+            isScrollControlled: true,
+            builder: (context) => SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                ),
+                child: const AddTaskScreen(),
+              ),
+            ),
           );
         },
       ),
@@ -64,9 +72,9 @@ class TasksScreen extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              child: ListView(children: <Widget>[
-                TaskTile(title: 'Buy milk', isChecked: false),
-                TaskTile(title: 'Buy bread', isChecked: false),
+              child: ListView(children: const <Widget>[
+                TaskTile(),
+                TaskTile(),
               ]),
               decoration: const BoxDecoration(
                 color: Colors.white,
