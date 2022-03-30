@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:todoey_flutter/widgets/task_tile.dart';
 import 'package:todoey_flutter/screens/add_task_screen.dart';
+import 'package:todoey_flutter/widgets/task_list.dart';
+import 'package:todoey_flutter/models/task.dart';
 
-class TasksScreen extends StatelessWidget {
+class TasksScreen extends StatefulWidget {
   const TasksScreen({Key? key}) : super(key: key);
+  @override
+  _TaskScreenState createState() => _TaskScreenState();
+}
+
+class _TaskScreenState extends State<TasksScreen> {
+  List<Task> tasks = [];
+  late String? newTaskTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +29,17 @@ class TasksScreen extends StatelessWidget {
                 padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).viewInsets.bottom,
                 ),
-                child: const AddTaskScreen(),
+                child: AddTaskScreen(
+                  addTaskCallbackWithTitle: (newValue) {
+                    newTaskTitle = newValue;
+                  },
+                  addTaskCallback: () {
+                    setState(() {
+                      tasks.add(Task(name: newTaskTitle!));
+                    });
+                    Navigator.pop(context);
+                  },
+                ),
               ),
             ),
           );
@@ -72,10 +90,7 @@ class TasksScreen extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              child: ListView(children: const <Widget>[
-                TaskTile(),
-                TaskTile(),
-              ]),
+              child: TasksList(tasks: tasks),
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
