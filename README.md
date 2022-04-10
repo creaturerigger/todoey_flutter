@@ -1,16 +1,11 @@
 # todoey_flutter
 
-A new Flutter project.
+A simple Todoey Flutter project.
 
-## Getting Started
+## The project
 
-This project is a starting point for a Flutter application.
+This project is created as a part of a series of Flutter tutorials provided by App Brewery London.
 
-A few resources to get you started if this is your first Flutter project:
+In this project simple state management is applied with [provider](https://pub.dev/packages/provider) package published by [dash-overflow.net](https://dash-overflow.net/)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The project helps the user to create a todo list, however the data is not stored.
