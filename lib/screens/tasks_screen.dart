@@ -1,18 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:todoey_flutter/screens/add_task_screen.dart';
 import 'package:todoey_flutter/widgets/task_list.dart';
-import 'package:todoey_flutter/models/task.dart';
+import 'package:todoey_flutter/models/task_model.dart';
+import 'package:provider/provider.dart';
 
-class TasksScreen extends StatefulWidget {
-  const TasksScreen({Key? key}) : super(key: key);
-  @override
-  _TaskScreenState createState() => _TaskScreenState();
-}
-
-class _TaskScreenState extends State<TasksScreen> {
-  List<Task> tasks = [];
-  late String? newTaskTitle;
-
+class TasksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,17 +21,7 @@ class _TaskScreenState extends State<TasksScreen> {
                 padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).viewInsets.bottom,
                 ),
-                child: AddTaskScreen(
-                  addTaskCallbackWithTitle: (newValue) {
-                    newTaskTitle = newValue;
-                  },
-                  addTaskCallback: () {
-                    setState(() {
-                      tasks.add(Task(name: newTaskTitle!));
-                    });
-                    Navigator.pop(context);
-                  },
-                ),
+                child: AddTaskScreen(),
               ),
             ),
           );
@@ -79,7 +61,7 @@ class _TaskScreenState extends State<TasksScreen> {
                   ),
                 ),
                 Text(
-                  '${tasks.length} tasks',
+                  Provider.of<TaskModel>(context).taskCount.toString(),
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
@@ -90,7 +72,7 @@ class _TaskScreenState extends State<TasksScreen> {
           ),
           Expanded(
             child: Container(
-              child: TasksList(tasks: tasks),
+              child: TasksList(tasks: Provider.of<TaskModel>(context).tasks),
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
