@@ -1,6 +1,6 @@
 # todoey_flutter
 
-A simple Todoey Flutter project.
+A simple todo list Flutter project.
 
 ## The project
 
