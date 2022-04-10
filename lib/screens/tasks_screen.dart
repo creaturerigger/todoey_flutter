@@ -5,6 +5,7 @@ import 'package:todoey_flutter/models/task_model.dart';
 import 'package:provider/provider.dart';
 
 class TasksScreen extends StatelessWidget {
+  const TasksScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +62,7 @@ class TasksScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  Provider.of<TaskModel>(context).taskCount.toString(),
+                  '${Provider.of<TaskModel>(context).taskCount} Tasks',
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
@@ -72,7 +73,7 @@ class TasksScreen extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              child: TasksList(tasks: Provider.of<TaskModel>(context).tasks),
+              child: const TasksList(),
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(

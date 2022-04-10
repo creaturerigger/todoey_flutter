@@ -20,46 +20,47 @@ class AddTaskScreen extends StatelessWidget {
         ),
         padding: const EdgeInsets.all(20.0),
         child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              const Text(
-                'Add Task',
-                style: TextStyle(
-                  fontSize: 30.0,
-                  color: Colors.lightBlueAccent,
-                ),
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'Add Task',
+              style: TextStyle(
+                fontSize: 30.0,
+                color: Colors.lightBlueAccent,
               ),
-              TextField(
-                autofocus: true,
-                textAlign: TextAlign.center,
-                decoration: const InputDecoration(
-                  hintText: 'Enter your task',
+            ),
+            TextField(
+              autofocus: true,
+              textAlign: TextAlign.center,
+              decoration: const InputDecoration(
+                hintText: 'Enter your task',
+              ),
+              onChanged: (newValue) {
+                taskTitle = newValue;
+              },
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: TextButton(
+                child: const Text(
+                  'Add',
+                  style: TextStyle(fontSize: 20.0),
                 ),
-                onChanged: (newValue) {
-                  taskTitle = newValue;
+                style: TextButton.styleFrom(
+                  primary: Colors.white,
+                  backgroundColor: Colors.lightBlueAccent,
+                  minimumSize: const Size.fromHeight(30.0),
+                ),
+                onPressed: () {
+                  Provider.of<TaskModel>(context, listen: false)
+                      .addTask(taskTitle);
+                  Navigator.pop(context);
                 },
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20.0),
-                child: TextButton(
-                  child: const Text(
-                    'Add',
-                    style: TextStyle(fontSize: 20.0),
-                  ),
-                  style: TextButton.styleFrom(
-                    primary: Colors.white,
-                    backgroundColor: Colors.lightBlueAccent,
-                    minimumSize: const Size.fromHeight(30.0),
-                  ),
-                  onPressed: () {
-                    Provider.of<TaskModel>(context, listen: false)
-                        .addTask(taskTitle);
-                    Navigator.pop(context);
-                  },
-                ),
-              ),
-            ]),
+            ),
+          ],
+        ),
       ),
     );
   }

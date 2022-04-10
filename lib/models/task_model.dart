@@ -1,10 +1,12 @@
-import 'package:flutter/material.dart';
+import 'dart:collection';
+
+import 'package:flutter/foundation.dart';
 import 'package:todoey_flutter/models/task.dart';
 
 class TaskModel extends ChangeNotifier {
   final List<Task> _tasks = [];
 
-  List<Task> get tasks => _tasks;
+  UnmodifiableListView<Task> get tasks => UnmodifiableListView<Task>(_tasks);
 
   int get taskCount => _tasks.length;
 
